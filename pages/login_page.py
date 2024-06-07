@@ -31,8 +31,8 @@ class LoginPage(BasePage):
         self.password_input.fill(value=password)
         self.login_button.click()
 
-    def placeholders_present(self, login_placeholder: str, password_placeholder: str):
+    def placeholders_present(self):
         self.login_placeholder.should_be_visible()
         self.password_placeholder.should_be_visible()
-        self.login_placeholder.should_have_attribute('placeholder', login_placeholder)
-        self.password_placeholder.should_have_attribute('placeholder', password_placeholder)
+        self.login_placeholder.should_have_attribute('placeholder', 'Username')
+        self.password_placeholder.should_have_attribute('placeholder', 'Password')
