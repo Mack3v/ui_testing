@@ -3,6 +3,7 @@ from playwright.sync_api import Browser, Page, sync_playwright
 
 from pages.products_page import ProductsPage
 from pages.login_page import LoginPage
+from components.side_bar import SideBar
 from yaml_reader import read_config
 
 
@@ -39,7 +40,8 @@ def login(login_page):
     yield
 
 
-@pytest.fixture(scope='session')
-def logout(products_page):
+@pytest.fixture(scope='function', autouse=False)
+def logout(chromium_page):
     yield
-    products_page.side_bar.logout()
+    side_bar = SideBar(chromium_page)
+    side_bar.logout()

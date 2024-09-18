@@ -18,31 +18,3 @@ class BasePage:
         actual_url = self.page.url
         assert actual_url == expected_url, \
             f"URL не соответствует ожидаемому. Ожидался: '{expected_url}', Получен: '{actual_url}'"
-
-    def find_element(self, selector: str):
-        return self.page.query_selector(selector)
-
-    def click_element(self, selector: str) -> None:
-        element = self.find_element(selector)
-        if element:
-            element.click()
-
-    def input_text(self, selector: str, text: str) -> None:
-        element = self.find_element(selector)
-        if element:
-            element.fill(text)
-
-    def get_text(self, selector: str):
-        element = self.find_element(selector)
-        return element.text if element else None
-
-    def is_element_visible(self, selector: str) -> bool:
-        element = self.find_element(selector)
-        return True if element and element.is_visible() else False
-
-    def is_element_enabled(self, selector: str) -> bool:
-        element = self.find_element(selector)
-        return True if element and element.is_enabled() else False
-
-    def is_element_present(self, selector: str) -> bool:
-        return bool(self.find_element(selector))

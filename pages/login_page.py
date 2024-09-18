@@ -10,20 +10,17 @@ class LoginPage(BasePage):
     def __init__(self, page: Page) -> None:
         super().__init__(page)
 
-        self.login_input = Input(
-            page, locator="#user-name", name='Login input'
-        )
-        self.password_input = Input(
-            page, locator="#password", name='Password input'
-        )
-        self.login_button = Button(
-            page, locator="#login-button", name='Login button'
-        )
+        self.login_input = Input(page, locator="#user-name", name="Login input")
+        self.password_input = Input(page, locator="#password", name="Password input")
+        self.login_button = Button(page, locator="#login-button", name="Login button")
         self.login_placeholder = Title(
             page, locator="input[data-test='username']", name="Login title"
         )
         self.password_placeholder = Title(
-            page, locator="input[data-test='password']", name="Password Placeholder"
+            page, locator="input[data-test='password']", name="Password placeholder"
+        )
+        self.error_msg = Title(
+            page, locator="[data-test='error']", name="Error message"
         )
 
     def authorization(self, name: str, password: str):
@@ -34,5 +31,8 @@ class LoginPage(BasePage):
     def placeholders_present(self):
         self.login_placeholder.should_be_visible()
         self.password_placeholder.should_be_visible()
-        self.login_placeholder.should_have_attribute('placeholder', 'Username')
-        self.password_placeholder.should_have_attribute('placeholder', 'Password')
+        self.login_placeholder.should_have_attribute("placeholder", "Username")
+        self.password_placeholder.should_have_attribute("placeholder", "Password")
+
+    def check_error_message(self, text: str):
+        self.error_msg.should_have_text(text)
