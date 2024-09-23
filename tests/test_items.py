@@ -15,11 +15,11 @@ class TestInventoryPage:
             ("backpack", "Sauce Labs Backpack"),
         ],
     )
-    def test_add_item_to_cart(
+    def test_item_order(
         self, login, logout, products_page: ProductsPage, item, item_name
     ):
         """
-        Тест заказа товара с общей страницы: добавление в корзину, заполнение формы заказа, финиш
+        Тест заказа товара с общей страницы: добавление в корзину, заполнение формы заказа, подтверждение
         """
         products_page.add_item_to_card(item)
         products_page.check_remove_item_button(item)
@@ -29,3 +29,4 @@ class TestInventoryPage:
         products_page.fill_checkout_form()
         products_page.open_confirm_order_page()
         products_page.check_item_name_in_order(item_name)
+        products_page.finish_order()

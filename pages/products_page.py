@@ -6,6 +6,7 @@ from page_factory.title import Title
 from page_factory.input import Input
 from pages.base_page import BasePage
 from data.checkout_data import CheckoutData
+from yaml_reader import read_config
 
 
 class ProductsPage(BasePage):
@@ -40,6 +41,7 @@ class ProductsPage(BasePage):
         )
         self.continue_button = Button(page, locator="#continue", name="Continue button")
         self.finish_button = Button(page, locator="#finish", name="Finish button")
+        self.config = read_config()
 
     def check_products_count(self, count: int):
         product = self.product_card.find_all_items().all()
@@ -58,11 +60,11 @@ class ProductsPage(BasePage):
 
     def open_shopping_cart(self):
         self.shopping_cart.click()
-        self.assert_url("https://www.saucedemo.com/cart.html")
+        self.assert_url(self.config["CART_URL"])
 
     def open_checkout_form(self):
         self.checkout_button.click()
-        self.assert_url("https://www.saucedemo.com/checkout-step-one.html")
+        self.assert_url(self.config["CHECKOUT_ONE_URL"])
 
     def fill_checkout_form(self):
         data = CheckoutData().generate_data()
@@ -76,8 +78,8 @@ class ProductsPage(BasePage):
 
     def open_confirm_order_page(self):
         self.continue_button.click()
-        self.assert_url("https://www.saucedemo.com/checkout-step-two.html")
+        self.assert_url(self.config["CHECKOUT_TWO_URL"])
 
     def finish_order(self):
         self.finish_button.click()
-        self.assert_url("https://www.saucedemo.com/checkout-complete.html")
+        self.assert_url(self.config["CHECKOUT_COMPLETE_URL"])
