@@ -1,10 +1,10 @@
 # UI testing Project
 
 Проект тестирования сайта [saucedemo](https://www.saucedemo.com/) с использованием Playwright, Python.  
-Для локаторов и методов работы с элементами на страницах используется Page Object Model.
+Для локаторов и методов работы с элементами на страницах используется Page Object Model.  
+В conftest стоит headless=True для корректного запуска в Docker. В случае ошибки создаются скриншоты (пример в репозитории)
 
 ## Описание тестов
-
 <details>
 <summary>Тест заказа товара</summary>
 
@@ -65,6 +65,25 @@
 <details>
 <summary>data</summary>
 
-В данном случае используется для генерация случайных данных для полей формы заказа 
+В данном случае используется для генерации случайных данных для полей формы заказа 
+
+</details>
+
+<details>
+<summary>Dockerfile</summary>
+
+Для запуска тестов в стандартном контейнере PlayWright:
+### Шаги:
+- docker pull mcr.microsoft.com/playwright/python:v1.47.0-noble
+- docker run -it --rm --ipc=host mcr.microsoft.com/playwright/python:v1.47.0-noble /bin/bash
+- docker build -t my-playwright-tests .
+- docker run --rm my-playwright-tests pytest -v --tb=short
+
+</details>
+
+<details>
+<summary>pytest.ini</summary>
+
+Для указания pytest.mark (помогает избежать лишних предупреждений)
 
 </details>

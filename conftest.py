@@ -15,12 +15,28 @@ def config():
 @pytest.fixture(scope="session")
 def chromium_page(config) -> Page:
     with sync_playwright() as playwright:
-        chromium = playwright.chromium.launch(headless=False)
+        chromium = playwright.chromium.launch(headless=True)
         page = chromium.new_page()
         page.set_viewport_size({"width": 1920, "height": 1080})
         page.goto(config["BASE_URL"])
         yield page
         chromium.close()
+
+
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    report = outcome.get_result()
+
+    setattr(item, "rep_" + report.when, report)
+
+
+@pytest.fixture(autouse=True)
+def check_test_status(request, chromium_page):
+    yield
+
+    if request.node.rep_call.failed:
+        chromium_page.screenshot(path=f"{request.node.name}.png")
 
 
 @pytest.fixture(scope="session")
