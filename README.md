@@ -87,3 +87,16 @@
 Для указания pytest.mark (помогает избежать лишних предупреждений)
 
 </details>
+
+<details>
+<summary>Запуск</summary>
+
+- git clone https://github.com/Mack3v/ui_testing.git
+- pip install virtualenv
+- virtualenv venv
+- source venv/bin/activate или .\venv\Scripts\Activate (для PowerShell)
+- pip install -r requirements.txt
+- python -m pytest
+
+
+</details>
