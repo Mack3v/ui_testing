@@ -15,7 +15,7 @@ def config():
 @pytest.fixture(scope="session")
 def chromium_page(config) -> Page:
     with sync_playwright() as playwright:
-        chromium = playwright.chromium.launch(headless=False)
+        chromium = playwright.chromium.launch(headless=True)
         page = chromium.new_page()
         page.set_viewport_size({"width": 1920, "height": 1080})
         page.goto(config["BASE_URL"])
