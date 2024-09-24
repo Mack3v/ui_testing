@@ -15,7 +15,7 @@ def config():
 @pytest.fixture(scope="session")
 def chromium_page(config) -> Page:
     with sync_playwright() as playwright:
-        chromium = playwright.chromium.launch(headless=True)
+        chromium = playwright.chromium.launch(headless=False)
         page = chromium.new_page()
         page.set_viewport_size({"width": 1920, "height": 1080})
         page.goto(config["BASE_URL"])
@@ -51,9 +51,8 @@ def products_page(chromium_page: Page) -> ProductsPage:
 
 @pytest.fixture(scope="session")
 def login(login_page, config):
-    login_page.visit("https://www.saucedemo.com/")
     login_page.visit(config["BASE_URL"])
-    login_page.authorization("standard_user", "secret_sauce")
+    login_page.authorization(config["login"], config["password"])
     yield
 
 

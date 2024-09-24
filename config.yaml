@@ -5,3 +5,6 @@ CART_URL: https://www.saucedemo.com/cart.html
 CHECKOUT_ONE_URL: https://www.saucedemo.com/checkout-step-one.html
 CHECKOUT_TWO_URL: https://www.saucedemo.com/checkout-step-two.html
 CHECKOUT_COMPLETE_URL: https://www.saucedemo.com/checkout-complete.html
+
+login: standard_user
+password: secret_sauce
