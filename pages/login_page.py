@@ -14,10 +14,10 @@ class LoginPage(BasePage):
         self.password_input = Input(page, locator="#password", name="Password input")
         self.login_button = Button(page, locator="#login-button", name="Login button")
         self.login_placeholder = Title(
-            page, locator="input[data-test='username']", name="Login title"
+            page, locator="[data-test='username']", name="Login title"
         )
         self.password_placeholder = Title(
-            page, locator="input[data-test='password']", name="Password placeholder"
+            page, locator="[data-test='password']", name="Password placeholder"
         )
         self.error_msg = Title(
             page, locator="[data-test='error']", name="Error message"

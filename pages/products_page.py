@@ -37,7 +37,7 @@ class ProductsPage(BasePage):
             page, locator="#postal-code", name="Postal code field"
         )
         self.item_name = Title(
-            page, locator=".inventory_item_name", name="Postal code field"
+            page, locator=".inventory_item_name", name="Product title"
         )
         self.continue_button = Button(page, locator="#continue", name="Continue button")
         self.finish_button = Button(page, locator="#finish", name="Finish button")

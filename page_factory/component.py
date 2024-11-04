@@ -11,15 +11,11 @@ class Component(ABC):
     @property
     @abstractmethod
     def type_of(self) -> str:
-        return 'component'
+        return "component"
 
     def get_locator(self, **kwargs) -> Locator:
         locator = self.locator.format(**kwargs)
         return self.page.locator(locator)
-
-    def click(self, **kwargs) -> None:
-        locator = self.get_locator(**kwargs)
-        locator.click()
 
     def should_be_visible(self, **kwargs) -> None:
         locator = self.get_locator(**kwargs)
